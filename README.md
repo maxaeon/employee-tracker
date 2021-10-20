@@ -29,6 +29,11 @@ Run the following command on your CLI to run the application:
 
 Follow the prompts to create a company database.
 
+## Screenshot
+
+![Screenshot (113)](https://user-images.githubusercontent.com/87254760/138183112-f0447082-2182-447d-96d5-bf5d2438ca88.png)
+
+
 ## Credits
 * Inquirer package https://www.npmjs.com/package/inquirer
 * MySQL2 package https://www.npmjs.com/package/mysql2
