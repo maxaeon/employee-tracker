@@ -9,7 +9,7 @@ const exit = () => {
 const mainMenu = async () => {
   const answer = await inquirer.prompt([
     {
-     // type: "list",
+      type: "list",
       name: "menu",
       message: "What would you like to do?",
       choices: [
@@ -33,6 +33,30 @@ const mainMenu = async () => {
   ]);
 
   answer.menu();
+
+  //   switch (answer.menu) {
+  //     case "View all departments":
+  //       return viewDepartments();
+  //     case "View all roles":
+  //       return viewRoles();
+  //     case "View all employees":
+  //       return viewEmployees();
+  //     case "Add a department":
+  //       return addDepartment();
+  //     case "Add a role":
+  //       return addRole();
+  //     case "Add an employee":
+  //       return addEmployee();
+  //     case "Update an employee role":
+  //       return updateEmployeeRole();
+  //     case "Update employee manager":
+  //       return updateEmployeeManager();
+  //     case "View employees by manager":
+  //       return viewByManager();
+  //     case "Exit":
+  //       console.log("Bye!");
+  //       break;
+  //   }
 };
 
 function viewDepartments() {
@@ -74,7 +98,8 @@ const addDepartment = async () => {
       validate: validateInput,
     },
   ]);
-  // console.log
+  // console.log("answer", answer);
+  // console.log("answer.name", answer.name);
   const departmentName = answer.name;
   db.addADepartment(departmentName).then(() => {
     db.findAllDepartments().then(([rows]) => {
@@ -85,11 +110,11 @@ const addDepartment = async () => {
 };
 
 const addRole = async () => {
-  // same as .then() above
+  // same as .then() above, gives us a Tuple
   const [rows] = await db.findAllDepartments();
   console.table(rows);
   const departmentChoices = rows.map(({ name, id }) => ({ name, value: id }));
-  // console.log(departmentChoices)
+  // console.log(departmentChoices);
   const answer = await inquirer.prompt([
     {
       type: "input",
@@ -110,7 +135,8 @@ const addRole = async () => {
       choices: departmentChoices,
     },
   ]);
-  // console.log
+  // console.log("answer", answer);
+  // console.log("answer.name", answer.name);
 
   db.addARole(answer.name, answer.salary, answer.department).then(() => {
     db.findAllRoles().then(([rows]) => {
@@ -311,9 +337,9 @@ const deleteDepartment = async () => {
       choices: departmentChoices,
     },
   ]);
-  //   const [updatedDepartments] = await db.deleteADepartment(department)
-  //   console.table(updatedDepartments)
-  //   return mainMenu()
+  //   const [updatedDepartments] = await db.deleteADepartment(department);
+  //   console.table(updatedDepartments);
+  //   return mainMenu();
 
   db.deleteADepartment(department).then(() => {
     db.findAllDepartments().then(([rows]) => {
